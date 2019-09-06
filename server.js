@@ -32,32 +32,13 @@
 //   console.log('server on!');
 // });
 
-var io = require('socket.io').listen(50000);
+var http = require('http');
+var fs = require('fs');
 
-io.sockets.on('connection', function(socket) {
-  socket.emit('connection', {
-     type : 'connected'
-   });
-
-  socket.on('connection', function(data) {
-    if(data.type == 'join') {
-      socket.join(data.room);
-      socket.set('room', data.room);
-      socket.emit('system', { message : '채팅방에 오신 것을 환영합니다.' });
-      socket.broadcast.to(data.room).emit('system', { message : data.name + '님이 접속하셨습니다.'
+http.createServer(function(req, res){
+    fs.readFile('client.html',function (err, data){
+        res.writeHead(200, {'Content-Type': 'text/html','Content-Length':data.length});
+        res.write(data);
+        res.end();
     });
-  }
-});
-
-socket.on('user', function(data) {
-   socket.get('room', function(error, room) {
-      socket.broadcast.to(room).emit('message', data);
-     });
-    });
-
-    var port = process.env.PORT || 3000; //*
-    app.listen(port, function(){
-    //http.listen(3000, function(){ //4
-      console.log('server on!');
-    });
-  });
+}).listen(8000);
