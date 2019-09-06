@@ -25,7 +25,10 @@ io.on('connection', function(socket){ //3
     io.emit('receive message', msg);
   });
 });
-
-http.listen(3000, function(){ //4
-  console.log('server on!');
+var port = process.env.PORT || 3000; //*
+app.listen(port, function(){
+  console.log('Server On!');
 });
+// http.listen(3000, function(){ //4
+//   console.log('server on!');
+// });
