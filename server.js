@@ -54,4 +54,10 @@ socket.on('user', function(data) {
       socket.broadcast.to(room).emit('message', data);
      });
     });
+
+    var port = process.env.PORT || 3000; //*
+    app.listen(port, function(){
+    //http.listen(3000, function(){ //4
+      console.log('server on!');
+    });
   });
