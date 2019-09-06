@@ -45,7 +45,7 @@
 
 // server.js
 
-var express = require('express').listen(process.env.PORT || 3000);
+var express = require('express');
 var app = express();
 var http = require('http').Server(app); //1
 var io = require('socket.io')(http);    //1
@@ -71,6 +71,6 @@ io.on('connection', function(socket){ //3
   });
 });
 
-http.listen(process.env.PORT || 3000 , function(){ //4
+http.listen(3000, function(){ //4
   console.log('server on!');
 });
