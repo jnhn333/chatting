@@ -1,5 +1,5 @@
 
-var io = require('socket.io').listen(50000);
+var io = require('socket.io').listen(process.env.PORT || 3000);
 
 io.sockets.on('connection', function(socket){
 
